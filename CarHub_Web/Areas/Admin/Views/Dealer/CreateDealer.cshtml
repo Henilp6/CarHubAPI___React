@@ -1,0 +1,92 @@
+﻿@model CarHub_Web.Models.VM.DealerCreateVM
+
+<form asp-action="CreateDealer">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Create Dealer</h4>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            
+            <div class="col-2">
+                <label asp-for="Dealer.DealerName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.DealerName" class="form-control" />
+                <span asp-validation-for="Dealer.DealerName" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.MobileNumber" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.MobileNumber" class="form-control" />
+                <span asp-validation-for="Dealer.MobileNumber" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.Email" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.Email" class="form-control" />
+                <span asp-validation-for="Dealer.Email" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.DealerLocation" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.DealerLocation" class="form-control" />
+                <span asp-validation-for="Dealer.DealerLocation" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.BrandId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="Dealer.BrandId" class="form-select" asp-items="@Model.BrandList">
+                    <option disabled selected>--Select Brand--</option>
+                </select>
+                <span asp-validation-for="Dealer.BrandId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Dealer.IsAvailable"></label>
+                <input asp-for="Dealer.IsAvailable" type="checkbox" value="true" checked />
+            </div>
+           
+
+           
+
+            
+
+            
+
+            <div class="col-5 offset-2">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+          
+
+            <div class="col-5 ">
+                <a asp-action="IndexDealer" asp-controller="Dealer" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+@*public int Id { get; set; }
+        [Required]
+        [DisplayName(" Dealer Name")]
+        public string DealerName { get; set; }
+        [Required]
+        public string MobileNumber { get; set; }
+        public string? Email { get; set; }
+        public string DealerLocation { get; set; }
+
+        public int BrandId { get; set; }
+        [ValidateNever]
+        public BrandDTO Brand { get; set; }
+        [DisplayName("Is Available")]
+        public bool IsAvailable { get; set; }
+*@

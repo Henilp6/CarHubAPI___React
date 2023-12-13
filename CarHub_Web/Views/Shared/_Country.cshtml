@@ -1,0 +1,16 @@
+﻿@model IEnumerable<CarHub_Web.Models.Dto.CountryDTO>
+
+@foreach (var item in Model)
+{
+	<tr>
+		<td>@item.CountryName</td>
+		<td>@item.IsActive</td>
+
+		<td>
+			<a asp-area="Admin" asp-controller="Country" asp-action="UpdateCountry" asp-route-CountryId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+			<a onClick="Delete('@Url.Action("DeleteCountry", "Country", new { CountryId = @item.Id })')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+		</td>
+
+	</tr>
+
+}

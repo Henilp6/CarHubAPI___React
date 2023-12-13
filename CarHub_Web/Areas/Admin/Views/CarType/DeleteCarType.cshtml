@@ -1,0 +1,31 @@
+﻿@model CarHub_Web.Models.Dto.CarTypeDTO
+<form asp-action="DeleteCarType">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete Category</h4>
+        <hr />
+
+        <input hidden asp-for="Id" />
+        <div class="row">
+            <div class="col-2">
+                <label asp-for="TypeName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="TypeName" disabled class="form-control" />
+            </div>
+
+            
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexCarType" asp-controller="CarType" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

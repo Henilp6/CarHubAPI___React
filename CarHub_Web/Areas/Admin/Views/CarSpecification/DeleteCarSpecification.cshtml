@@ -1,0 +1,159 @@
+﻿@model CarHub_Web.Models.VM.CarSpecificationDeleteVM
+<form asp-action="DeleteCarSpecification">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete CarSpecification</h4>
+        <hr />
+
+        <input hidden asp-for="CarSpecification.Id" />
+        <div class="row">
+            @*<div class="col-2">
+                <label asp-for="TypeName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="TypeName" disabled class="form-control" />
+            </div>*@
+            <div class="col-2">
+                <label asp-for="CarSpecification.CarId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select disabled asp-for="CarSpecification.CarId" class="form-select" asp-items="@Model.CarList">
+                    <option disabled selected>--Select Color--</option>
+                </select>
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.Displacement" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input disabled asp-for="CarSpecification.Displacement" class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.MaxPower" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.MaxPower" disabled class="form-control" />
+               
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.MaxTorque" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.MaxTorque" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.MaxPower" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.MaxPower" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.Cylinder" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.Cylinder" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.FrontSuspension" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.FrontSuspension" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.RearSuspension" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.RearSuspension" disabled class="form-control" />
+                
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.AirbagNo" class="form-control" />
+                <span asp-validation-for="CarSpecification.AirbagNo" disabled class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.AirbagNo" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.ShockAbsorbers" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.ShockAbsorbers" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.Length" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.Length" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.Width" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.Width" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.Height" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.Height" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.BootSpace" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.BootSpace" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.SeatingCapacity" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.SeatingCapacity" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.WheelBase" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.WheelBase" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.GearBox" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.GearBox" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="CarSpecification.DriveType" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CarSpecification.DriveType" disabled class="form-control" />
+                
+            </div>
+
+
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexCarSpecification" asp-controller="CarSpecification" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

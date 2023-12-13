@@ -1,0 +1,45 @@
+﻿@model CarHub_Web.Models.Dto.CountryUpdateDTO
+
+
+<form asp-action="UpdateCountry">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Update Country</h4>
+        <hr />
+
+        <input hidden asp-for="Id" />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="CountryName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CountryName" class="form-control" />
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="IsActive" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input type="checkbox" asp-for="IsActive" value="true" checked />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="col-5 offset-2">
+                <input type="submit" value="Update" class="btn btn-primary form-control" />
+            </div>
+
+
+            <div class="col-5 ">
+                <a asp-action="IndexCountry" asp-controller="Country" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+           
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

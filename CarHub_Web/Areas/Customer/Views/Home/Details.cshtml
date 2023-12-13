@@ -1,0 +1,439 @@
+﻿@model CarHub_Web.Models.VM.HomeVM
+
+
+
+
+
+<div class="card shadow border-0 mt-4 mb-4">
+    <div class="card-header bg-secondary bg-gradient text-light py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-white text-uppercase">@Model.Car.Name</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body  px-3">
+
+
+        <div class="py-3">
+          @*  <div class="row">
+                <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                        <small>Back to Home</small>
+                    </a>
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="col-12 col-lg-4 text-center mb-3">
+                    <div>
+                        <a href="@Url.Action("AllImages", "Home", new { carId = Model.Car.Id })">
+
+
+
+
+                            @if (Model.CarImagelist != null && Model.CarImagelist.Count > 0)
+                            {
+                                <div id="carouselExampleIndicators" class="carousel  slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+
+                                        @foreach (var imageWithIndex in
+                                       Model.CarImagelist
+                                       .Select((image, index) => new { Image = image, Index = index }))
+                                        {
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@imageWithIndex.Index" class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
+                                        }
+
+
+                                    </div>
+                                    <div class="carousel-inner">
+                                        @foreach (var imageWithIndex in
+                                       Model.CarImagelist
+                                       .Select((image, index) => new { Image = image, Index = index }))
+                                        {
+                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
+                                                <img src="@imageWithIndex.Image.ImageUrl" class="d-block w-100" alt="...">
+                                            </div>
+                                        }
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+
+                            }
+                        </a>
+                    </div>
+
+                    <div>
+                        <a asp-action="AllImages" asp-route-carId="@Model.Car.Id">
+                            All Images
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-12 col-lg-6  offset-lg-1">
+
+                    <div class="col-12 col-md-6 pb-4">
+                        <span class="badge">@Model.Car.Name</span>
+                    </div>
+                    
+                    <div class="ps-2">
+                        <span class="text-dark text-opacity-50">
+                            Brand Name :-
+                        </span>
+                        <span class="text-dark">
+                            @Model.Car.Brand.BrandName
+                        </span>
+                    </div>
+                    <div class="ps-2">
+                        <span class="text-dark text-opacity-50">
+                            ManufacturingYear :-
+                        </span>
+                        <span class="text-dark">
+                            @Model.Car.ManufacturingYear
+                        </span>
+                    </div>
+
+                  
+                    @*  <div class="row pl-2 my-3">
+                    <p class="text-secondary lh-sm">Details :- @Model.Car.Details</p>
+
+                    </div>*@
+                    <div class="row ps-2">
+                        <h6 class="text-dark text-opacity-50  pb-2">
+                            Details :-
+                         
+                        </h6>
+                    </div>
+                    <div class="text-dark" id="ReadMore">
+                        @Model.Car.Details.Substring(0, 100);
+                    </div>
+                    <div class="text-dark" id="ReadLess">
+                        @Model.Car.Details;
+                    </div>
+                    <span id="dots">...</span>
+                    <a onclick="myFunction()" id="myBtn" class="text-decoration-underline text-primary">Read more</a>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="">
+            <div class=" text-dark text-uppercase">
+
+                <h4>
+                    @Model.Car.Name Car Specification
+                </h4>
+
+            </div>
+        </div>
+
+
+
+
+        <div class=" text-body">
+
+
+            @foreach (var item in Model.MileageList)
+            {
+                <div class="d-flex ">
+                    <div class="ps-2 ms-5">
+
+                        <a>
+                            <i class="bi bi-speedometer2"></i>
+                            Mileage
+
+                        </a>
+                        <div class="">
+                            @item.Average
+                        </div>
+                    </div>
+                    <div class="ps-2 ms-5">
+
+                        <a>
+                            <i class="bi bi-fuel-pump-fill"></i>
+                            Fuel Type
+
+                        </a>
+                        <div class="">
+                           
+                            @item.FuelType
+                        </div>
+                    </div>
+                    <div class="ps-2 ms-5">
+                        <a>
+
+                            <i class="bi bi-pin-map"></i>
+                            Transmission
+
+                        </a>
+                        <div class="">
+                            @item.Transmission
+                        </div>
+                    </div>
+                    @foreach (var item1 in Model.CarSpecificationList)
+
+
+                    {
+                        <div class="ps-2 ms-5">
+                            <a>
+
+                                <i class="bi bi-browser-safari"></i>
+                                Engine
+
+
+
+                            </a>
+                            <div class="">
+
+                                @item1.Displacement
+
+                            </div>
+                        </div>
+                        <div class="ps-2 ms-5">
+                            <a>
+
+                                <i class="bi bi-lightning-charge"></i>
+                                Max power
+
+
+
+                            </a>
+                            <div class="">
+
+                                @item1.MaxPower
+
+                            </div>
+                        </div>
+                        <div class="ps-2 ms-5">
+                            <a>
+
+                                <i class="bi bi-chevron-down"></i>
+                                Seating Capacity
+
+
+
+                            </a>
+                            <div class="">
+
+                                @item1.SeatingCapacity
+
+                            </div>
+                        </div>
+                        <div class="ps-2 ms-5">
+                            <a>
+
+                                <i class="bi bi-geo-fill"></i>
+                                Gear
+
+
+
+                            </a>
+                            <div class="">
+
+                                @item1.GearBox
+
+                            </div>
+                        </div>
+                        <div class="ps-2 ms-5">
+                            <a>
+
+                                <i class="bi bi-balloon"></i>
+                                AirBag
+
+                            </a>
+                            <div class="">
+
+                                @item1.AirbagNo
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+        </div>
+
+        <h3>
+            <a href="@Url.Action("SpecificationIndex", "Home", new { carId = @Model.Car.Id })">
+            </a>
+            <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">   </p>
+
+        </h3>
+
+        <a asp-action="SpecificationIndex" style="margin-left: 20px;" asp-route-carId="@Model.Car.Id" class="ms-4">
+            All Features or Specification
+        </a>
+        <!-- Add a margin-left of 20px to the second link -->
+        <a class="btn btn-primary " style="margin-left: 20px;"
+           asp-action="CreateReview" asp-controller="Review" asp-area="Customer" asp-route-carId="@Model.Car.Id">
+            Add Review
+        </a>
+
+        <br>
+        <hr />
+
+       @* <div class="row">
+            <a class="btn btn-success justify-content-end"
+               asp-action="CreateReview" asp-controller="Review" asp-area="Admin" asp-route-companyId="@Model.Car.Id">
+                Add Review
+            </a>
+        </div>*@
+
+        <div class="row  my-1">
+            @foreach (var item in Model.ReviewList)
+            {
+                <div class="row mb-1">
+
+                    <div class="pl-1 text-start">
+                        <span class="fw-bold text-uppercase">Title:-</span>
+                        @item.Title
+                    </div>
+                    <div class="pl-1 text-start">
+                        <span class="fw-bold text-uppercase">Description:-</span>
+                        @item.Descriptaion
+                    </div>
+                    
+                    
+                    <div class=" d-flex justify-content-evenly m-2 ">
+                        <div class="ratingContainer">
+                            @for (int i = 0; i < int.Parse(@item.overallRating); i++)
+                            {
+                                <i class="ratingStar fas fa-star"></i>
+                            }
+                            @for (int i = 0; i < 5 - int.Parse(@item.overallRating); i++)
+                            {
+                                <i class="ratingStar far fa-star"></i>
+                            }
+                        </div>
+
+                        <div class="border border-1 border-dark rounded-pill p-1">
+                            <a asp-controller="Review" asp-action="LikeCount" asp-area="Customer" asp-route-reviewId="@item.Id">
+                                <i class="bi bi-hand-thumbs-up Like"></i>
+                                <span>@item.LikeCount</span>
+                                @*<p class="mb-0">Like</p>*@
+                            </a>
+
+                        </div>
+
+                        <div class="border border-1 border-dark rounded-pill p-1">
+                            <a asp-action="DisLikeCount" asp-controller="Review" asp-area="Customer" asp-route-reviewId="@item.Id">
+                                <i class="bi bi-hand-thumbs-down DisLike"></i>
+                                <span>@item.DisLikeCount</span>
+                                @*<p class="mb-0">DisLike</p>*@
+                            </a>
+
+                        </div>
+
+                        <div class="">
+                                <a class="btn btn-primary " asp-action="ReviewXComment" asp-controller="Review" asp-route-reviewId="@item.Id" asp-route-carId="@item.CarId" asp-area="Customer">
+                                <i class="bi bi-chat"></i>Add your comment
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item1 in Model.ReviewXCommentList)
+                        {
+                            @if (@item.Id == @item1.ReviewId)
+                            {
+                                <div class="row px-4">
+                                    UserName:- @item1.ApplicationUser.UserName
+                                </div>
+                                <div>
+                              Comment: -@item1.Comment
+                                </div>
+                            }
+                        }
+                    </div>
+                    
+                </div>
+                <hr />
+            }
+        </div>
+
+        
+    </div>
+
+</div>
+
+
+<style>
+    #ReadLess {
+        display: none;
+    }
+
+    #myBtn:hover {
+        cursor: grab;
+    }
+
+</style>
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.2/css/all.min.css" integrity="sha512-g0gRzvKX9GBUbjlJZ02n2GLRJVabgLm6b3oypbkF6ne1T2+ZHCucKRd8qt31a3BCGahAlBmXUDS7lu2pYuWB7A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var btnText = document.getElementById("myBtn");
+            var ReadMore = document.getElementById("ReadMore");
+            var ReadLess = document.getElementById("ReadLess");
+
+            if (ReadMore.style.display === "none") {
+                dots.style.display = "inline";
+                ReadLess.style.display = "none";
+                btnText.innerHTML = "Read More";
+                ReadMore.style.display = "inline";
+            } else {
+                dots.style.display = "none";
+                ReadMore.style.display = "none";
+                btnText.innerHTML = "Read less";
+                ReadLess.style.display = "inline";
+            }
+        }
+    </script>
+   
+    <script>
+
+
+
+        $('.Like').mouseover(function () {
+
+            $(this).addClass('bi-hand-thumbs-up-fill').removeClass('bi-hand-thumbs-up');
+            //$(".DisLike").removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
+
+        });
+        $('.Like').mouseout(function () {
+
+            $(this).addClass('bi-hand-thumbs-up').removeClass('bi-hand-thumbs-up-fill');
+            //$(".DisLike").removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
+
+        });
+
+
+        $('.DisLike').mouseover(function () {
+
+            $(this).addClass('bi-hand-thumbs-down-fill').removeClass('bi-hand-thumbs-down');
+            //$(".Like").removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+
+        });
+        $('.DisLike').mouseout(function () {
+
+            $(this).addClass('bi-hand-thumbs-down').removeClass('bi-hand-thumbs-down-fill');
+            //$(".Like").removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+
+        });
+        
+
+
+
+
+
+    </script>
+}

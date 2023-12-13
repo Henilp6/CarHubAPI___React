@@ -1,0 +1,146 @@
+﻿@model CarHub_Web.Models.VM.StateIndexVM
+<br />
+<div class="container p-4 border">
+	<div class="row pb-2">
+		<div class="col">
+			<h4 class="text-primary">State List</h4>
+		</div>
+		<div class="col text-end pt-1">
+			<a asp-controller="State" asp-action="CreateState" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New State</a>
+		</div>
+	</div>
+
+	<form asp-action="IndexState">
+
+		<div class="row">
+			<span class="col-md-2">
+				<input name="term" id="SearchBox" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search by name" />
+			</span>
+			<span class="col-md-4">
+				<button type="submit" class="btn btn-info">Search</button>
+			</span>
+			<div class="col-2 text-end">
+				<a asp-controller="State" asp-action="IndexState" class="btn btn-primary">
+					<i class="bi bi-house-door-fill"></i> Back To List
+				</a>
+			</div>
+		</div>
+	</form>
+
+	<table class="table">
+		<thead>
+			<tr>
+
+				<th>
+					State Name
+				</th>
+				<th>
+					IsActive
+				</th>
+				<th>
+					Country Name
+				</th>
+
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.States)
+			{
+				<tr>
+
+					<td>@item.StateName</td>
+					<td>@item.IsActive</td>
+					<td>@item.Country.CountryName</td>
+
+					<td>
+						<a asp-controller="State" asp-action="UpdateState" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+						<a onClick="Delete('@Url.Action("DeleteState", "State", new { id = @item.Id })')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			@if (Model.CurrentPage > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" href="/Admin/State/IndexState?term=@Model.Term&orderBy=@Model.OrderBy&currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+			}
+			@for (int i = 1; i <= Model.TotalPages; i++)
+			{
+				if (i == Model.CurrentPage)
+				{
+					<li class="page-item"><a class="page-link active" style="background-color:rgb(69, 206, 244)" href="/Admin/State/IndexState?term=@Model.Term&orderBy=@Model.OrderBy&currentPage=@i"> @i</a></li>
+				}
+				else
+				{
+					<li class="page-item"><a class="page-link" style="background-color:floralwhite" href="/Admin/State/IndexState?term=@Model.Term&orderBy=@Model.OrderBy&currentPage=@i"> @i</a></li>
+				}
+			}
+			@if (Model.CurrentPage < Model.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" href="/Admin/State/IndexState?term=@Model.Term&orderBy=@Model.OrderBy&currentPage=@(Model.CurrentPage+1)" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			}
+		</ul>
+	</nav>
+
+
+</div>
+
+
+@section Scripts{
+	<style type="text/css">
+		#SearchBox {
+			border: 2px Solid cadetblue;
+			margin-bottom: 17px;
+		}
+	</style>
+	<script>
+		function Delete(url) {
+			debugger
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: url,
+						type: 'DELETE',
+						success: function (data) {
+							window.location.reload(true);
+							//**window.location.href = '@Url.Action("IndexFirstColor", "Color")';*/ // Replace with your controller and action names*/
+
+						}
+					})
+				}
+			})
+		}
+
+
+	</script>
+
+
+
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+
+
+}
+
+

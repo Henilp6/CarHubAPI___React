@@ -1,0 +1,49 @@
+﻿@model CarHub_Web.Models.VM.StateDeleteVM
+
+<form asp-action="DeleteState">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete State</h4>
+        <hr />
+        <input hidden asp-for="State.Id" />
+        <div class="row">
+
+            <div class="col-2">
+                <label asp-for="State.StateName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="State.StateName" disabled class="form-control" />
+            </div>
+
+            <div class="col-2">
+                <label asp-for="State.CountryId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="State.CountryId" disabled class="form-select" asp-items="@Model.CountryList">
+                    <option disabled selected>--Select Country--</option>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="State.IsActive" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input type="checkbox" asp-for="State.IsActive" value="true" checked />
+              
+            </div>
+           
+
+            <div class="col-5 offset-2">
+                <a asp-action="IndexState" asp-controller="State" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

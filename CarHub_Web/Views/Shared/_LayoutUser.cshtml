@@ -1,0 +1,129 @@
+﻿@using CarHub_Utility;
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Car Hub</title>
+     @*<link rel="stylesheet" href="~/css/bootstrap.css" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+@*    <link rel="stylesheet" href="~/css/Boostrap.css" />*@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CarHub_Web.styles.css" asp-append-version="true" />c
+
+    <style>
+        .nav-item a:hover {
+                 background-color: cornflowerblue;
+             }
+    </style>
+
+</head>
+<body>
+    <partial name="_Notification" />
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">  <img src="/images/home/carlogo1.png" style="width:50px; height:50px" /> Car Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (httpAcc
+                        .HttpContext.Session.GetString(SD.SessionToken) != null &&
+
+                        httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                      {
+                        @if (!User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area = "Admin" asp-controller="Home" asp-action="Index"> Go to Admin Page </a>
+                            </li>
+                        }
+                      }
+                        @*  <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                        </li*@
+                    </ul>
+                    @*<ul class="navbar-nav">
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <div class="row justify-content-center align-items-center">
+
+                                <div class="col-md-8 m-4">
+
+                                    <div class="container-fluid d-flex">
+                                        <input type="text" name="searchText" placeholder="Search cars" />
+                                        <button type="submit" name="searchText" value="Search" class="btn btn-primary">
+                                            Search
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div> 
+                        
+                        }
+                    </ul>*@
+                    @using (Html.BeginForm("CarSearchByLazyLoading", "Home", FormMethod.Post))
+                    {
+                                <div class="container-fluid d-flex">
+                                  <input type="text" name="searchText" placeholder="Search Car" value="@ViewBag.searchText" />
+                                    <button type="submit" name="searchText" value="Search" class="btn btn-primary ms-1">
+                                        Search
+                                    </button>
+                                </div>
+                    }
+                    <ul class="nav justify-content-end">
+
+                        @if (httpAcc
+                        .HttpContext.Session.GetString(SD.SessionToken) != null &&
+
+                        httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark " asp-area="Customer" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                          
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Auth" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Auth" asp-action="Register">Register</a>
+                            </li>
+                          
+
+                        }
+                       
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted d-flex align-items-center justify-content-center">
+        <div class="container text-center">
+            Copyright© @DateTime.Now.Year  - Car Hub - <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,173 @@
+﻿@model CarHub_Web.Models.VM.HomeVM
+
+<div class="row">
+    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+
+        <div >
+            <figure class="figure">
+                <img src="@Model.Car.ImageURL" class="figure-img img-fluid rounded" alt="...">
+                
+            </figure>
+            @*<img src="@Model.Car.ImageURL" class="d-block w-100" alt="...">*@
+        </div>
+        
+     </div>
+
+       
+
+
+   
+    <div class="col-12 col-lg-6 offset-lg-1">
+
+        <div class="col-12 col-md-6 pb-4">
+            <span class="badge">@Model.Car.Name</span>
+        </div>
+        <div class="row ps-2">
+            <h6 class="text-dark text-opacity-50 ">Brand Name :- @Model.Car.Brand.BrandName</h6>
+        </div>
+        <div class="row ps-2">
+            <h6 class="text-dark text-opacity-50  pb-2">
+                ManufacturingYear :-
+                <span class="">
+                    @Model.Car.ManufacturingYear
+                </span>
+            </h6>
+        </div>
+
+
+        <div class="row ps-2 ">
+            <h6 class="text-dark text-opacity-50 ">Details :- @Model.Car.Details</h6>
+
+        </div>
+
+
+    </div>
+
+</div>
+        
+
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <h3 class="box-title mt-5">Car Specification Info</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-product">
+            <tbody>
+                <tr>
+                    <td width="390">Brand Name</td>
+                    <td>@Model.Car.Brand.BrandName</td>
+                </tr>
+                <tr>
+                    <td>Car Name</td>
+                    <td>@Model.Car.Name</td>
+                </tr>
+                @foreach (var item1 in Model.CarSpecificationList)
+                {
+                    <tr>
+                        <td>Displacement(cc)</td>
+                        <td>@item1.Displacement</td>
+                    </tr>
+                    <tr>
+                        <td>Max Power</td>
+                        <td>@item1.MaxPower</td>
+                    </tr>
+                    <tr>
+                        <td>Max Torque</td>
+                        <td>@item1.MaxTorque</td>
+                    </tr>
+                    <tr>
+                        <td>No of Cylinder</td>
+                        <td>@item1.Cylinder</td>
+                    </tr>
+                    <tr>
+                        <td>FrontSuspension</td>
+                        <td>@item1.FrontSuspension</td>
+                    </tr>
+                    <tr>
+                        <td>RearSuspension</td>
+                        <td>@item1.RearSuspension</td>
+                    </tr>
+                    <tr>
+                        <td>ShockAbsorbers</td>
+                        <td>@item1.ShockAbsorbers</td>
+                    </tr>
+                    <tr>
+                        <td>Length</td>
+                        <td>@item1.Length</td>
+                    </tr>
+                    <tr>
+                        <td>Width</td>
+                        <td>@item1.Width</td>
+                    </tr>
+                    <tr>
+                        <td>Height</td>
+                        <td>@item1.Height</td>
+                    </tr>
+                    <tr>
+                        <td>BootSpace</td>
+                        <td>@item1.BootSpace</td>
+                    </tr>
+                    <tr>
+                        <td>SeatingCapacity</td>
+                        <td>@item1.SeatingCapacity</td>
+                    </tr>
+                    <tr>
+                        <td>WheelBase</td>
+                        <td>@item1.WheelBase</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+@*<div class="dropdown">
+
+    @foreach (var item1 in Model.FeatureTypeList)
+    {
+        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            @item1.FeatureTypeName
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            @foreach (var item2 in Model.FeatureXFeaturetypeList)
+            {
+                if (item1.Id == item2.FeatureTypeId) // Assuming `FeatureTypeId` exists in item2 to filter relevant features
+                {
+                    <li><a class="dropdown-item" asp-area="Customer" asp-action="SpecificationIndex" asp-route-carId="@Model.Car.Id" asp-route-featureTypeId="@item1.Id" asp-controller="Home">@item2.Feature.Name</a></li>
+                }
+            }
+        </ul>
+    }
+</div>*@
+
+
+ <div class="dropdown">
+    @foreach (var item1 in Model.FeatureTypeList)
+    {
+        <a class="btn btn-secondary dropdown-toggle" asp-area="Customer" asp-action="SpecificationIndex" asp-route-carId="@Model.Car.Id" asp-route-featureTypeId="@item1.Id" asp-controller="Home" data-bs-toggle="dropdown" aria-expanded="false">
+        
+           @item1.FeatureTypeName
+        
+         </a>
+    
+    
+    <ul class="dropdown-menu">
+        @foreach (var item2 in Model.FeatureXFeaturetypeList)
+        {
+                if (item1.Id == item2.FeatureTypeId)
+                {
+                    <li><a class="dropdown-item">@item2.Feature.Name</a></li>
+                }
+        }
+        
+    </ul>
+    }
+    
+   
+ </div>
+
+
+
+
+

@@ -1,0 +1,63 @@
+﻿@model CarHub_Web.Models.VM.MileageDeleteVM
+
+<form asp-action="DeleteMileage">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete Mileage</h4>
+        <hr />
+        <input hidden asp-for="Mileage.Id" />
+        <div class="row">
+
+
+            <div class="col-2">
+                <label asp-for="Mileage.CarId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="Mileage.CarId" disabled class="form-select" asp-items="@Model.CarList">
+                    <option disabled selected>--Select Car--</option>
+                </select>
+                
+            </div>
+
+            <div class="col-2">
+                <label asp-for="Mileage.FuelType" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Mileage.FuelType" disabled class="form-control" />
+               
+            </div>
+
+
+
+            <div class="col-2">
+                <label asp-for="Mileage.Transmission" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Mileage.Transmission" disabled class="form-control" rows="5"></input>
+               
+            </div>
+
+            <div class="col-2">
+                <label asp-for="Mileage.Average" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Mileage.Average" disabled class="form-control" rows="5"></input>
+                
+            </div>
+            <div class="col-5 offset-2">
+                <input type="submit" value="Delete" class="btn btn-primary form-control" />
+            </div>
+
+
+            <div class="col-5 ">
+                <a asp-action="IndexMileage" asp-controller="Mileage" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+           
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

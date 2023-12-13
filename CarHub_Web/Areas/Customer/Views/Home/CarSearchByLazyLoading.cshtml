@@ -1,0 +1,27 @@
+﻿
+<div id="search-text" class="row pb-3 m-2">
+    @Html.Partial("_CarSearch", (ViewBag.list as List<CarHub_Web.Models.Dto.CarDTO>))
+</div>
+
+
+
+
+@*<partial name="_CompanySearch" model="Model" />*@
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/js/lazyLoadingForCarSearch.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("div#loading").hide();
+        });
+        var url = '@Url.Action("GetSearchCarResults", "Home", new { searchText = @Html.Raw(ViewBag.searchText),area = "Customer" })';
+
+        //window.addEventListener("scroll", scrollHandler);
+        $(window).scroll(scrollHandler);
+    </script>
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+	}

@@ -1,0 +1,59 @@
+﻿@model List<CarHub_Web.Models.Dto.CarDTO>
+
+    @foreach (var car in Model)
+    {
+        <div class="col-lg-4 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+                        <div>
+                            <a href="@Url.Action("Details", "Home", new { carId = car.Id })">
+                                <img src="@car.ImageURL" class="card-img-top rounded" width="300px" height="400px" />
+
+                            </a>
+                        </div>
+
+
+
+
+                        <div class="card-body pb-0">
+                            <div>
+                                @*<a href="@Url.Action("Details", "Home", new { carId = car.Id })">*@
+
+                                    <div class="pl-1">
+                                        <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@car.Name</p>
+                                        <p class="card-title text-warning text-center">by <b>@car.Brand.BrandName</b></p>
+                                    </div>
+                                    <div class="pl-1">
+                                        <p class="text-dark text-opacity-75 text-center mb-0">
+                                            Starting Price:
+                                            <span>
+                                                @car.StartingPrice.ToString("c")
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="pl-1">
+                                        <p class="text-dark text-opacity-75 text-center">
+                                            End Price:
+                                            <span>
+                                                @car.EndPrice.ToString("c")
+                                            </span>
+                                        </p>
+                                    </div>
+                               @* </a>*@
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Details" asp-route-carId="@car.Id" class="btn btn-primary bg-gradient border-0 form-control">
+                                Details
+                            </a>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }

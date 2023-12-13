@@ -1,0 +1,25 @@
+﻿@model CarHub_Web.Models.VM.HomeVM
+
+<form asp-action="ReviewXComment" asp-controller="Review" method="post" asp-area="Customer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <input hidden asp-for="Review.Id" />
+                <input hidden asp-for="Car.Id" />
+                <h1>Add Comment @Model.Review.Title</h1>
+                <label for="jay" class="visually-hidden">Comment for @Model.Review.Title</label>
+                <textarea asp-for="ReviewXComment.Comment" style="width: 700px; height: 150px;" id="jay" rows="2"></textarea>
+            </div>
+            <div class="col-12">
+                <!-- Buttons grouped together -->
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Details" asp-controller="Home" asp-route-carId="@Model.Car.Id" class="btn-primary btn">Close</a>
+            </div>
+        </div>
+    </div>
+</form>
+ 
+
+
+
+

@@ -1,0 +1,63 @@
+﻿@model CarHub_Web.Models.VM.CityDeleteVM
+
+<form asp-action="DeleteCity">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete City</h4>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="City.Id" hidden />
+
+            <div class="col-2">
+                <label asp-for="City.CityName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="City.CityName" class="form-control" />
+                <span asp-validation-for="City.CityName" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="City.CountryId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="City.CountryId" class="form-select" asp-items="@Model.CountryList">
+                    <option disabled selected>--Select Country--</option>
+                </select>
+                <span asp-validation-for="City.CountryId" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="City.StateId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="City.StateId" class="form-select" asp-items="@Model.StateList">
+                    <option disabled selected>--Select Country--</option>
+                </select>
+                <span asp-validation-for="City.StateId" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="City.IsActive" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input type="checkbox" asp-for="City.IsActive" value="true" checked />
+                <span asp-validation-for="City.IsActive" class="text-danger"></span>
+            </div>
+
+            <div class="col-5 offset-2">
+                <a asp-action="IndexCity" asp-controller="City" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

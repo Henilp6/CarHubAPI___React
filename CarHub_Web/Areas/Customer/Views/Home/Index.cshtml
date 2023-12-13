@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Components
+@model CarHub_Web.Models.VM.HomeVM
+
+<div class="container ">
+
+   
+</div>
+
+
+
+
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+
+            <img src="https://media.zigcdn.com/media/content/2023/Aug/64dcac7c1591e_720x540.jpg" style="height: 570px" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Hyundai/Exter/9482/1684926596004/headlight-43.jpg" style="height: 570px" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Hyundai/Exter/9482/1684926596004/exterior-image-164.jpg" style="height: 570px" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+@*Home page*@
+
+<h2>
+    All Brands
+</h2>
+
+<section>
+
+        <div class="container-fluid justify-content-evenly ">
+            <div class="row">
+
+                @if (Model.BrandList != null)
+                {
+                    foreach (var brand in Model.BrandList)
+                    {
+                    <div class="col-2 text-center border m-2 p-2 ">
+                        <a href="@Url.Action("BrandIndex", "Home", new { brandId = brand.Id })">
+                            <img src="@brand.BrandImage" class="card-img-top rounded" />
+                        </a>
+                        <p class="card-title h5 text-dark opacity-75 text-uppercase text-decoration-none text-center">@brand.BrandName</p>
+                    </div>
+
+
+                       @*<div class="col-2 text-center  border m-2 p-2 ">
+                            <a href="@Url.Action("BrandIndex", "Home", new { brandId = brand.Id })">
+                                <img src="@brand.BrandImage" class="card-img-top rounded" />
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-decoration-none text-center">@brand.BrandName</p>
+                            </a>
+                        </div>*@
+                    }
+                }
+            </div>
+        </div>
+    
+</section>
+
+@*<div class="row h-80 w-80">
+    @foreach (var brand in Model.BrandList)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+                        <img src="@brand.BrandImage" class="card-img-top rounded" />
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@brand.BrandName</p>
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+
+@*<section>
+    <div class="container">
+        <div class="row-col-12">
+            <div class="container-fluid justify-content-evenly d-flex">
+                <div class="col-2 text-center border">
+                    <div class="row pb-3">
+                        @foreach (var brand in Model.BrandList)
+                        {
+
+
+
+
+                            <div class="container-fluid justify-content-evenly d-flex">
+                                <img src="@brand.BrandImage" class="card-img-top rounded" />
+
+                            </div>
+
+
+
+                                <div class="pl-1">
+
+                                    <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@brand.BrandName</p>
+                                </div>
+
+
+
+                        }
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>*@
+<partial name="_CarList" model="Model" />
+

@@ -1,0 +1,91 @@
+﻿@model CarHub_Web.Models.VM.CarXColorCreateVM
+
+<form asp-action="CreateCarXColor">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Add Color Of @Model.Car.Name </h4>
+        @*<div class="col-5 offset-2 text-end">
+            <a asp-action="IndexCarXColor" asp-controller="CarXColor" class="btn-primary btn form-control ">Back to List</a>
+        </div>*@
+        <hr />
+
+        <input hidden asp-for="CarXColor.Id" />
+        <input hidden asp-for="Car.Id" />
+        <input hidden asp-for="Car.Name" />
+        <input hidden asp-for="Car.StartingPrice" />
+        <input hidden asp-for="Car.EndPrice" />
+        <input hidden asp-for="Car.ManufacturingYear" />
+        <div class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+          @*  <div class="col-2">
+                <label asp-for="Car.Name" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Car.Name" disabled class="form-control" />
+                <span asp-validation-for="Car.Name" class="text-danger"></span>
+            </div>*@
+            <div class="col-12">
+                <div class="form-check">
+                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input" />
+                    <label class="form-check-label" for="selectAllCheckbox">Select All Color</label>
+                </div>
+            </div>
+
+            <div class="py-2 col-12">
+                @for (int index = 0; index < @Model.Colorlist.Count(); index++)
+                {
+                    <input type="checkbox" asp-for="@Model.Colorlist[index].IsChecked" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.Colorlist[index].IsChecked">@Model.Colorlist[index].ColorName</label>
+                    <input type="hidden" asp-for="@Model.Colorlist[index].Id" />
+                    <input type="hidden" asp-for="@Model.Colorlist[index].ColorName" />
+                    <br />
+                }
+            </div>
+
+
+
+
+
+            @*    <div class="py-2 col-12">
+            @foreach (var item in @Model.Colorlist)
+            {
+
+
+            <input type="checkbox" asp-for="@item.IsChecked" class="form-check-input" />
+            <label asp-for="@item.IsChecked">
+            @item.ColorName
+            </label>
+            <input type="hidden" asp-for="@item.Id" />
+            <input type="hidden" asp-for="@item.ColorName" />
+            }
+            </div>*@
+
+
+            <div class="col-5 offset-2">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+
+
+            <div class="col-5 ">
+                <a asp-action="IndexCar" asp-controller="Car" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            
+
+
+
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <script>
+        // JavaScript function to handle "Select All" checkbox
+        $("#selectAllCheckbox").click(function () {
+            var isChecked = $(this).is(":checked");
+            $("input[type=checkbox]").prop("checked", isChecked);
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

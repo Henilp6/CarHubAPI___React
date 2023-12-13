@@ -1,0 +1,61 @@
+﻿@model CarHub_Web.Models.VM.VariantDeleteVM
+<form asp-action="DeleteVariant">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete Variant</h4>
+        <hr />
+
+        <input hidden asp-for="Variant.Id" />
+        <div class="row">
+            @*<div class="col-2">
+                <label asp-for="TypeName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="TypeName" disabled class="form-control" />
+            </div>*@
+            <div class="col-2">
+                <label asp-for="Variant.CarId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select disabled asp-for="Variant.CarId" class="form-select" asp-items="@Model.CarList">
+                    <option disabled selected>--Select Variant--</option>
+                </select>
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.VariantName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input disabled asp-for="Variant.VariantName" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.Transmission" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Variant.Transmission" disabled class="form-control" />
+               
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.Price" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Variant.Price" disabled class="form-control" />
+                
+            </div>
+
+
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexVariant" asp-controller="Variant" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,60 @@
+﻿@model CarHub_Web.Models.VM.VariantUpdateVM
+
+
+<form asp-action="UpdateVariant">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Update Variant</h4>
+        <hr />
+        <input hidden asp-for="Variant.Id" />
+        <div class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+
+            <div class="col-2">
+                <label asp-for="Variant.CarId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="Variant.CarId" class="form-select" asp-items="@Model.CarList">
+                    <option disabled selected>--Select Variant--</option>
+                </select>
+                <span asp-validation-for="Variant.CarId" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.VariantName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Variant.VariantName" class="form-control" />
+                <span asp-validation-for="Variant.VariantName" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.Transmission" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Variant.Transmission" class="form-control" />
+                <span asp-validation-for="Variant.Transmission" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="Variant.Price" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Variant.Price" class="form-control" />
+                <span asp-validation-for="Variant.Price" class="text-danger"></span>
+            </div>
+
+            <div class="col-5 offset-2">
+                <input type="submit" value="Update" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-5 ">
+                <a asp-action="IndexVariant" asp-controller="Variant" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

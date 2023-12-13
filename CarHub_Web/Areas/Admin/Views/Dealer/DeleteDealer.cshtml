@@ -1,0 +1,72 @@
+﻿@model CarHub_Web.Models.VM.DealerDeleteVM
+<form asp-action="DeleteCarSpecification">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Delete CarSpecification</h4>
+        <hr />
+
+        <input hidden asp-for="Dealer.Id" />
+        <div class="row">
+            @*<div class="col-2">
+                <label asp-for="TypeName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="TypeName" disabled class="form-control" />
+            </div>*@
+            <div class="col-2">
+                <label asp-for="Dealer.DealerName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.DealerName" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.MobileNumber" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.MobileNumber" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.Email" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.Email" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.DealerLocation" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Dealer.DealerLocation" disabled class="form-control" />
+                
+            </div>
+            <div class="col-2">
+                <label asp-for="Dealer.BrandId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="Dealer.BrandId" class="form-select" asp-items="@Model.BrandList">
+                    <option disabled selected>--Select Brand--</option>
+                </select>
+                
+            </div>
+            <div class="mb-3">
+                <label asp-for="Dealer.IsAvailable"></label>
+                <input asp-for="Dealer.IsAvailable" disabled type="checkbox" value="true" checked />
+            </div>
+
+
+            <div class="col-5 offset-2">
+                <input type="submit" value="Delete" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-5 ">
+                <a asp-action="IndexDealer" asp-controller="Dealer" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,201 @@
+﻿@model CarHub_Web.Models.VM.CarXFeatureCreateVM
+
+<form asp-action="CreateCarXFeature">
+    <br />
+    <div class="container border p-3">
+        <h4 class="text-primary">Add Feature Of  @Model.Car.Name </h4>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input hidden asp-for="Car.Id" />
+            <input hidden asp-for="CarXFeature.Id" />
+            <input hidden asp-for="CarXFeature.FeatureTypeId" />
+            <input hidden asp-for="Car.Name" />
+            <input hidden asp-for="Car.StartingPrice" />
+            <input hidden asp-for="Car.EndPrice" />
+            <input hidden asp-for="Car.ManufacturingYear" />
+           
+
+
+            <div class="row">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+
+
+
+                <div class="col-2">
+                    <label asp-for="CarXFeature.FeatureTypeId" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <select id="mySelect" asp-for="CarXFeature.FeatureTypeId" Selected="true" class="form-select" asp-items="@Model.FeatureTypeList">
+                        <option disabled selected>--Select FeatureType--</option>
+                    </select>
+                    <span asp-validation-for="CarXFeature.FeatureTypeId" class="text-danger"></span>
+                </div>
+
+               @* <div class="col-10 pb-3">
+                    @Html.DropDownListFor(
+                    model => model.CarXFeature.FeatureTypeId,
+                    Model.FeatureTypeList,
+                    "--Select FeatureType--",
+                    new { id = "mySelect", @class = "form-select" }
+                    )
+                    @Html.ValidationMessageFor(model => model.CarXFeature.FeatureTypeId, "", new { @class = "text-danger" })
+                </div>*@
+
+                <div class="col-12">
+                    <div class="form-check">
+                        <input type="checkbox" id="selectAllCheckbox" class="form-check-input" />
+                        <label class="form-check-label" for="selectAllCheckbox">Select All</label>
+                    </div>
+                </div>
+
+
+                <div class="py-2 col-12 feature-list-container">
+                    @for (int index = 0; index < @Model.Featurelist.Count(); index++)
+                    {
+                        <input type="checkbox" asp-for="@Model.Featurelist[index].IsChecked" class="form-check-input" />
+                        <label class="form-check-label" asp-for="@Model.Featurelist[index].IsChecked">@Model.Featurelist[index].Name</label>
+                        <input type="hidden" asp-for="@Model.Featurelist[index].Id" />
+                        <input type="hidden" asp-for="@Model.Featurelist[index].Name" />
+                        <br />
+                    }
+                </div>
+                <div class="col-5 offset-2">
+                    <input type="submit" value="Create" class="btn btn-primary form-control" />
+                </div>
+
+
+                <div class="col-5 ">
+                    <a asp-action="IndexCar" asp-controller="Car" class="btn-primary btn form-control ">Back to List</a>
+                </div>
+                
+
+
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@*@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        debugger
+    $(document).ready(function() {
+  $('#mySelect').change(function() {
+    var selectedItemId = $(this).val();
+    var CarId = @Model.Car.Id;
+    // Call the controller action and pass the selected item ID
+                window.location.href = '/CarXFeature/CreateCarXFeature?FeatureTypeId=' selectedItemId;
+                window.location.href = '/CarXFeature/CreateCarXFeature?carId=' + CarId;
+  });
+});
+    </script>
+
+}*@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+           
+            $('#mySelect').change(function () {
+                debugger
+                var selectedFeatureTypeId = $(this).val();
+                var CarId = @Model.Car.Id;
+                // Call the controller action and pass both FeatureTypeId and carId
+                window.location.href = '/Admin/CarXFeature/CreateCarXFeature?carId=' + CarId + '&FeatureTypeId=' + selectedFeatureTypeId;
+                
+               
+           
+            });
+        });
+    </script>
+    <script>
+        // JavaScript function to handle "Select All" checkbox
+        $("#selectAllCheckbox").click(function () {
+            var isChecked = $(this).is(":checked");
+            $("input[type=checkbox]").prop("checked", isChecked);
+        });
+    </script>
+}
+
+@*
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+                            </script>
+    <script src="https://cdn.tiny.cloud/1/your-tinymce-script.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mySelect').change(function () {
+                var FeatureTypeId = $(this).val();
+                var carId = @Model.Car.Id;
+            $.ajax({
+                    url: '@Url.Action("GetFeaturesByType", "CarXFeature")',
+                   // url: '@Url.Action("CreateCarXFeature", "CarXFeature")',
+                type: 'GET',
+                    data: { FeatureTypeId: FeatureTypeId, carId: carId },
+                success: function (data) {
+
+                        var featureListContainer = $('.feature-list-container');
+                        featureListContainer.empty();
+
+                    $.each(data, function (index, item) {
+                        featureListContainer.append(`
+                                    <input type="checkbox" name="Featurelist[${index}].IsChecked" class="form-check-input" value="${item.isChecked}" ${item.isChecked ? 'checked' : ''} />
+                            <label class="form-check-label">${item.name}</label>
+                            <input type="hidden" name="Featurelist[${index}].Id" value="${item.id}" />
+                            <input type="hidden" name="Featurelist[${index}].Name" value="${item.name}" />
+                            <br />
+                        `);
+                    });
+                }
+            });
+        });
+    });
+</script>
+*@
+
+@*    <script>
+        $(document).ready(function () {
+            $("#mySelect").change(function () {
+                var FeatureTypeId = $(this).val();
+                var carId = @Model.Car.Id;
+                $.ajax({
+                    url: '@Url.Action("CreateCarXFeature", "CarXFeature")',
+                    // url: '/City/getCitiesByState',
+                    type: 'GET',
+                    //dataType: 'json'
+                    data: { FeatureTypeId: FeatureTypeId, carId: carId },
+                    success: function (data) {
+                        alert("1")
+                        $("#mySelect").empty();
+                        $("#mySelect").append('<option disabled selected>--Select State--</option>');
+                        // alert(data);
+
+
+                        $.each(data, function (i, featureType) {
+                            debugger
+                            // alert(i);
+                            $("#mySelect").append($('<option></option>').val(featureType.id).text(featureType.featureTypeName));
+                        });
+                    },
+                    error: function (error) {
+                        // Handle errors if needed
+                    }
+                });
+            });
+
+
+        });
+    </script>*@
+}
+
+
